@@ -1,15 +1,40 @@
-## Put comments here that give an overall description of what your
-## functions do
+## THis file contains the solution to the Coursera.com R Programming Course
+## second programming assignment. This file has two functions, one that creates
+## a cacheble matrix object (makeCacheMatrix) and one (cacheSolve) that computes
+## the inverse of the cacheble matrix returned by makeCacheMatrix
 
-## Write a short comment describing this function
-
+## Create a cacheable matrix object.
+## @return cacheable matrix object
 makeCacheMatrix <- function(x = matrix()) {
+    m <- NULL
+    set <- function(y) {
+            x <<- y
+            m <<- NULL
+    }
 
+    get <- function() x
+    setInverse <- function(inverse) m <<- inverse
+    getInverse <- function() m
+    list(set = set,
+         get = get,
+         setInverse = setInverse,
+         getInverse = getInverse)
 }
 
-
-## Write a short comment describing this function
-
+## Calculate inverse matrix of a cacheable matrix object
+## @param x matrix object
+## @return cacheable matrix inverse
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+
+    # Return a matrix that is the inverse of 'x'
+    cachedInverse <- x$getInverse()
+    if(!is.null(m)) {
+        message("getting cached data")
+        return(cachedInverse)
+    }
+
+    matrix <- x$get()
+    inverseMatrix <- solve(matrix)
+    x$setInverse(inverseMatrix)
+    inverseMatrix
 }
