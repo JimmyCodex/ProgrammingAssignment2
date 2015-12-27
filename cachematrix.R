@@ -31,6 +31,7 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 ## Calculate inverse matrix of a cacheable matrix object
+## if cached, return the inverse from cache
 ## @param x cacheable matrix object
 ## @return inverseMatrix the inverse of the matrix in x
 cacheSolve <- function(x, ...) {
